@@ -15,7 +15,7 @@ export const routes: IComponent[] = [
     Component: FormPage,
   },
   {
-    path: paths.Item,
+    path: paths.Item + ":id",
     Component: ItemPage,
   },
   {

@@ -1,17 +1,14 @@
+import { CircularProgress, CircularProgressProps } from "@mui/material";
 import React, { FC } from "react";
-import { Icon } from "@iconify/react/dist/iconify.js";
 
-interface IComponent {
-  type?: "classic" | "circle-dots" | "dots";
+interface IComponent extends CircularProgressProps {
   text?: string | null;
 }
 
-const Loader: FC<IComponent> = ({ type = "classic", text = "Loading..." }) => {
+const Loader: FC<IComponent> = ({ text = "Loading...", ...props }) => {
   return (
     <div className="loader-component">
-      {type === "classic" && <Icon icon="eos-icons:loading" />}
-      {type === "circle-dots" && <Icon icon="eos-icons:bubble-loading" />}
-      {type === "dots" && <Icon icon="eos-icons:three-dots-loading" />}
+      <CircularProgress {...props} />
       {text ? <div className="loader">{text}</div> : null}
     </div>
   );

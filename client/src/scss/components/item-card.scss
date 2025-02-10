@@ -1,0 +1,36 @@
+@import "../variables";
+
+.item-card {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border: 1px solid $text-color;
+  border-radius: 1.5rem;
+  width: 600px;
+
+  &-image {
+    max-width: 25%;
+
+    img {
+      width: 100%;
+      border: 1px solid $text-color;
+      border-radius: 1.5rem;
+      aspect-ratio: 1;
+    }
+  }
+
+  &-info {
+    flex: 1 1;
+
+    & > *:first-child {
+      margin-top: 0;
+    }
+    & > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@import "../media/components/m-item-card";

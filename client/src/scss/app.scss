@@ -6,3 +6,23 @@ html {
   box-sizing: border-box;
   font-size: $font-size;
 }
+
+body {
+  color: $text-color;
+  background-color: $background-color;
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.text {
+    color: $text-color;
+  }
+  &.inherit {
+    color: inherit;
+  }
+}

@@ -1,6 +1,6 @@
 export const paths = {
   Form: "/form",
   List: "/list",
-  Item: "/item/:id",
+  Item: "/item/",
   Home: "/",
 };
