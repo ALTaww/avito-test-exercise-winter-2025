@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "@iconify/react": "^5.2.0",
     "@types/jest": "^29.5.14",
     "@types/react-dom": "^19.0.3",
     "cross-env": "^7.0.3",

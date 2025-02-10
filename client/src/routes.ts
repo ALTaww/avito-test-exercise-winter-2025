@@ -1,4 +1,5 @@
 import FormPage from "./pages/FormPage";
+import Home from "./pages/Home";
 import ItemPage from "./pages/ItemPage";
 import ListPage from "./pages/ListPage";
 import { paths } from "./paths";
@@ -20,5 +21,9 @@ export const routes: IComponent[] = [
   {
     path: paths.List,
     Component: ListPage,
+  },
+  {
+    path: paths.Home,
+    Component: Home,
   },
 ];

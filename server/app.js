@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const ItemTypes = {
   REAL_ESTATE: "Недвижимость",
@@ -9,12 +10,53 @@ const ItemTypes = {
 
 const app = express();
 app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: "http://localhost:1000",
+    methods: "GET,PUT,DELETE",
+    credentials: true,
+  })
+);
 
 // In-memory хранилище для объявлений
-let items = [];
+let items = [
+  {
+    id: 1,
+    name: "Квартира в центре",
+    description: "Просторная квартира в центре города",
+    location: "Москва",
+    type: "Недвижимость",
+    propertyType: "Квартира",
+    area: 100,
+    rooms: 3,
+    price: 15000000,
+  },
+  {
+    id: 2,
+    name: "Toyota Camry",
+    description: "Надежный автомобиль",
+    location: "Москва",
+    type: "Авто",
+    brand: "Toyota",
+    model: "Camry",
+    year: 2020,
+    mileage: 15000,
+  },
+  {
+    id: 3,
+    name: "Ремонт квартир",
+    description: "Качественный ремонт квартир",
+    location: "Москва",
+    type: "Услуги",
+    serviceType: "Ремонт",
+    experience: 5,
+    cost: 50000,
+    workSchedule: "Пн-Пт, 9:00-18:00",
+  },
+];
 
 const makeCounter = () => {
-  let count = 0;
+  let count = 4;
   return () => count++;
 };
 

@@ -16,6 +16,7 @@ export interface IItemsCommon {
   name: string;
   description: string;
   location: string;
+  imageUrl?: string;
 }
 
 export interface IRealEstates extends IItemsCommon {
@@ -34,7 +35,7 @@ export interface ICars extends IItemsCommon {
   mileage?: number;
 }
 
-export interface IServices {
+export interface IServices extends IItemsCommon {
   type: "Услуги";
   serviceType: string;
   experience: number;
