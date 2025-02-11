@@ -7,7 +7,7 @@ const Header = () => {
     <header>
       <div className="header">
         <Link to={paths.Form}>Form</Link>
-        <Link to={paths.Item}>Item</Link>
+        <Link to={paths.Item + "1"}>Item</Link>
         <Link to={paths.List}>List</Link>
       </div>
     </header>

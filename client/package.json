@@ -10,6 +10,7 @@
     "axios": "^1.7.9",
     "cra-template-typescript": "1.2.0",
     "mobx": "^6.13.6",
+    "notistack": "^3.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-mobx": "^0.0.4",

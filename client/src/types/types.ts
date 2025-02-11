@@ -16,7 +16,7 @@ export interface IItemsCommon {
   name: string;
   description: string;
   location: string;
-  imageUrl?: string;
+  image?: string;
 }
 
 export interface IRealEstates extends IItemsCommon {

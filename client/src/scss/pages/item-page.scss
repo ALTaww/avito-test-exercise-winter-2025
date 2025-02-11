@@ -1,0 +1,32 @@
+.item-page {
+  .item-info {
+    display: flex;
+    gap: 2rem;
+
+    &-image {
+      width: 33.3%;
+
+      img {
+        border: 1px solid black;
+        border-radius: 2rem;
+        aspect-ratio: 1;
+      }
+    }
+
+    &-main {
+      position: relative;
+      flex: 1 1;
+
+      .item-info-id {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+        border: 1px solid black;
+        border-radius: 50%;
+        padding: 1rem;
+        aspect-ratio: 1;
+      }
+    }
+  }
+}

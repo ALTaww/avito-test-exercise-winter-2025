@@ -15,12 +15,12 @@ const Item: FC<IComponent> = ({ item, ...props }) => {
   return (
     <div className="item-card">
       <div
-        className={`item-card-image${
+        className={`item-card-image image-container${
           props.className ? " " + props.className : ""
         }`}
       >
-        {item.imageUrl ? (
-          <img src={item.imageUrl} alt={item.name} />
+        {item.image ? (
+          <img src={item.image} alt={item.name} />
         ) : (
           <img src={placeholderImage} alt={item.name} />
         )}
