@@ -12,7 +12,6 @@ import placeholderImage from "../assets/images/placeholder-image.webp";
 import { Btn } from "../components";
 import Loader from "../templates/Loader";
 import "../css/item-page.css";
-import { paths } from "../paths";
 import { useSnackbar } from "notistack";
 
 const ItemPage = () => {
