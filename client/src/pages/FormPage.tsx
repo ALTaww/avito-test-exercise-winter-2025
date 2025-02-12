@@ -17,6 +17,8 @@ import { itemsApi } from "../api";
 import { Link } from "react-router-dom";
 import { paths } from "../paths";
 import { IItemsCategories, ItemTypeMap } from "../types/types";
+import "../css/form-page.css";
+import { ComponentContainer } from "../templates";
 
 const fieldCategories = {
   realEstate: "Недвижимость",
@@ -247,48 +249,50 @@ const FormPage = () => {
 
   return (
     <div className="page form-page">
-      <h1>Form</h1>
-      <div className="form-steps">Шаг {step} из 2</div>
-      <div className="form-container">
-        <form onSubmit={(e) => handleSubmit(e)}>
-          {step === 1 && (
-            <div className="form-step first-step">
-              <Form
-                fields={startFormFields}
-                errors={errors}
-                buttonType={fieldButtonTypes.button}
-                handleChange={handleChange}
-                handleClick={continueForm}
-              />
-            </div>
-          )}
-          {step === 2 && (
-            <div className="form-step second-step">
-              <Form
-                fields={categoryFields[formData["type"]]}
-                errors={errors}
-                buttonType={fieldButtonTypes.submit}
-                handleChange={handleChange}
-              />
-              <Btn
-                startIcon={<ArrowBackIcon />}
-                sx={{ mt: 2 }}
-                onClick={() => setStep((prev) => prev--)}
-              >
-                Назад
-              </Btn>
-            </div>
-          )}
-          {step === 3 && (
-            <div className="form-step third-step">
-              <p>
-                Объявление успешно создано{" "}
-                <Link to={paths.List}>К списку объявлений</Link>
-              </p>
-            </div>
-          )}
-        </form>
-      </div>
+      <ComponentContainer>
+        <h1>Form</h1>
+        <div className="form-steps">Шаг {step} из 2</div>
+        <div className="form-container">
+          <form onSubmit={(e) => handleSubmit(e)}>
+            {step === 1 && (
+              <div className="form-step first-step">
+                <Form
+                  fields={startFormFields}
+                  errors={errors}
+                  buttonType={fieldButtonTypes.button}
+                  handleChange={handleChange}
+                  handleClick={continueForm}
+                />
+              </div>
+            )}
+            {step === 2 && (
+              <div className="form-step second-step">
+                <Form
+                  fields={categoryFields[formData["type"]]}
+                  errors={errors}
+                  buttonType={fieldButtonTypes.submit}
+                  handleChange={handleChange}
+                />
+                <Btn
+                  startIcon={<ArrowBackIcon />}
+                  sx={{ mt: 2 }}
+                  onClick={() => setStep((prev) => prev--)}
+                >
+                  Назад
+                </Btn>
+              </div>
+            )}
+            {step === 3 && (
+              <div className="form-step third-step">
+                <p>
+                  Объявление успешно создано{" "}
+                  <Link to={paths.List}>К списку объявлений</Link>
+                </p>
+              </div>
+            )}
+          </form>
+        </div>
+      </ComponentContainer>
     </div>
   );
 };

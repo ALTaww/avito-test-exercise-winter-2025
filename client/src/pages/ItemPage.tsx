@@ -13,6 +13,7 @@ import { Btn } from "../components";
 import Loader from "../templates/Loader";
 import "../css/item-page.css";
 import { useSnackbar } from "notistack";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 const ItemPage = () => {
   const [itemData, setItemData] = useState<IItems | null>(null);
@@ -80,23 +81,25 @@ const ItemPage = () => {
               )}
             </div>
             <div className="item-info-main">
-              <h2 className="item-info-name">{itemData.name}</h2>
+              <h2 className="item-info-name">
+                {itemData.name}{" "}
+                <Btn
+                  variant="text"
+                  className="item-info-link"
+                  onClick={async () =>
+                    await copyTextToClipboard(window.location.toString())
+                  }
+                  aria-label="Копировать ссылку"
+                >
+                  <ContentCopyIcon className="copy-icon" />
+                </Btn>
+              </h2>
               <p className="item-info-description">{itemData.description}</p>
               <p className="item-info-type">{itemData.type}</p>
               <p className="item-info-location">{itemData.location}</p>
               <div className="item-info-button">
                 <Btn color="primary">Редактировать</Btn>
               </div>
-            </div>
-            <div className="item-info-link">
-              <Btn
-                variant="text"
-                onClick={async () =>
-                  await copyTextToClipboard(window.location.toString())
-                }
-              >
-                Копировать ссылку
-              </Btn>
             </div>
           </div>
         )}
