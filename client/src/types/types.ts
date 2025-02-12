@@ -2,7 +2,7 @@ export const IItemTypes = {
   realEstate: "Недвижимость",
   cars: "Авто",
   services: "Услуги",
-};
+} as const;
 
 export type ItemTypeMap = {
   Недвижимость: IRealEstates;
@@ -42,6 +42,8 @@ export interface IServices extends IItemsCommon {
   cost: number;
   workSchedule?: string;
 }
+
+export type IItemsCategories = IServices | ICars | IRealEstates;
 
 export type IItems = (IRealEstates | ICars | IServices) & { id: number };
 

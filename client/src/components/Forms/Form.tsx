@@ -15,7 +15,7 @@ interface IComponent {
   fields: IField[];
   buttonType?: IFieldButtonTypes;
   handleChange: (name: string, value: string, type: IFieldTypes) => void;
-  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 function returnField(
@@ -24,7 +24,7 @@ function returnField(
   handleChange: (name: string, value: string, type: IFieldTypes) => void
 ) {
   const commonProps = {
-    label: field.name,
+    label: field.label,
     variant: "outlined" as const,
     error: !!errors[field.name],
     helperText: errors[field.name] || "",

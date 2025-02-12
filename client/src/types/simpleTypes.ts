@@ -1,10 +1,16 @@
 export type IFieldTypes = keyof typeof fieldTypes;
 
 export type IField =
-  | { type: Exclude<IFieldTypes, "select">; name: string; required?: boolean } // Все, кроме select
+  | {
+      type: Exclude<IFieldTypes, "select">;
+      name: string; // должно быть что-то типо keyof IItemsCategories, но там сужение типов
+      label: string;
+      required?: boolean;
+    } // Все, кроме select
   | {
       type: "select";
-      name: string;
+      name: string; // то же самое
+      label: string;
       required?: boolean;
       selectOptions: string[];
     }; // Только select
