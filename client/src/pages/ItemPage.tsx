@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ComponentContainer } from "../templates";
 import { IItems } from "../types/types";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   createNewAbortController,
   fetchWithAbort,
@@ -14,6 +14,9 @@ import Loader from "../templates/Loader";
 import "../css/item-page.css";
 import { useSnackbar } from "notistack";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { userStore } from "../store";
+import { paths } from "../paths";
+import { observer } from "mobx-react";
 
 const ItemPage = () => {
   const [itemData, setItemData] = useState<IItems | null>(null);
@@ -98,7 +101,14 @@ const ItemPage = () => {
               <p className="item-info-type">{itemData.type}</p>
               <p className="item-info-location">{itemData.location}</p>
               <div className="item-info-button">
-                <Btn color="primary">Редактировать</Btn>
+                {userStore.isAuth ? (
+                  <Btn color="primary">Редактировать</Btn>
+                ) : (
+                  <div>
+                    <p>Для редактирования нужно войти в профиль</p>
+                    <Link to={paths.Login}>Войти</Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -109,4 +119,4 @@ const ItemPage = () => {
   );
 };
 
-export default ItemPage;
+export default observer(ItemPage);

@@ -2,6 +2,8 @@ import FormPage from "./pages/FormPage";
 import Home from "./pages/Home";
 import ItemPage from "./pages/ItemPage";
 import ListPage from "./pages/ListPage";
+import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
 import { paths } from "./paths";
 
 interface IComponent {
@@ -25,5 +27,13 @@ export const routes: IComponent[] = [
   {
     path: paths.Home,
     Component: Home,
+  },
+  {
+    path: paths.Login,
+    Component: Login,
+  },
+  {
+    path: paths.NotFound,
+    Component: NotFound,
   },
 ];

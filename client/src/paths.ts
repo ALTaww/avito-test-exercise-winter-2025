@@ -3,4 +3,6 @@ export const paths = {
   List: "/list",
   Item: "/item/",
   Home: "/",
+  Login: "/login",
+  NotFound: "*",
 };
