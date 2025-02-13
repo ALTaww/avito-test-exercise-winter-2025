@@ -3,13 +3,13 @@ import { ComponentContainer } from "../templates";
 import { TextField } from "@mui/material";
 import { userStore } from "../store";
 import { Btn } from "../components";
-import { IFieldErrors } from "../types/simpleTypes";
+import { IStringsObject } from "../types/simpleTypes";
 import { cookie } from "../utils";
 import { useSnackbar } from "notistack";
 import { observer } from "mobx-react";
 
 const Login = () => {
-  const [errors, setErrors] = useState<IFieldErrors>({});
+  const [errors, setErrors] = useState<IStringsObject>({});
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -23,7 +23,7 @@ const Login = () => {
     //e.preventDefault();
     if (!username || !password) {
       enqueueSnackbar("Заполните никнейм и пароль");
-      const newErrors: IFieldErrors = {};
+      const newErrors: IStringsObject = {};
       newErrors.username = !username ? "Некорректный никнейм" : "";
       newErrors.password = !password ? "Некорректный пароль" : "";
       setErrors(newErrors);

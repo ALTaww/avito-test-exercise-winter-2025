@@ -15,7 +15,7 @@ export type IField =
       selectOptions: string[];
     }; // Только select
 
-export interface IFieldErrors {
+export interface IStringsObject {
   [key: string]: string;
 }
 

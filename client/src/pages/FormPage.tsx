@@ -1,14 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Btn, Form } from "../components";
 import {
   fieldButtonTypes,
   fieldTypes,
   IField,
-  IFieldErrors,
+  IStringsObject,
   IFieldTypes,
 } from "../types/simpleTypes";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {
+  cookie,
   createNewAbortController,
   fetchWithAbort,
   handleError,
@@ -19,7 +20,7 @@ import { paths } from "../paths";
 import { IItemsCategories, ItemTypeMap } from "../types/types";
 import "../css/form-page.css";
 import { ComponentContainer } from "../templates";
-import { userStore } from "../store";
+import { formStore, userStore } from "../store";
 import { observer } from "mobx-react";
 
 const fieldCategories = {
@@ -177,16 +178,27 @@ function validateField(
 
 const FormPage = () => {
   const [step, setStep] = useState(1);
-  const [errors, setErrors] = useState<IFieldErrors>({});
+  const [errors, setErrors] = useState<IStringsObject>({});
   // Не совсем правильный тип,
-  const [formData, setFormData] = useState<IItemsCategories>({});
+  const [formData, setFormData] = useState<IItemsCategories | null>(
+    formStore.data
+  );
   const abortControllerRef = useRef<AbortController>(null);
 
+  // получить ранее заполненные поля
+  useEffect(() => {
+    if (formData) return;
+    const completedFormData = JSON.parse(cookie.getCookie("formData") || "{}");
+    if (!(completedFormData instanceof Object)) return;
+    setFormData(completedFormData);
+    formStore.setData(completedFormData);
+  }, [formData]);
+
   function validateForm(): boolean {
-    const newErrors: IFieldErrors = {};
+    const newErrors: IStringsObject = {};
 
     startFormFields.forEach((field) => {
-      if (field.required) {
+      if (field.required && formData) {
         const error = validateField(
           field.name,
           // ошибка типов потому что внутри IField name строка
@@ -206,7 +218,7 @@ const FormPage = () => {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    if (!validateForm()) return;
+    if (!formData || !validateForm()) return;
 
     const { controller, signal } = createNewAbortController(abortControllerRef);
     abortControllerRef.current = controller;
@@ -215,30 +227,34 @@ const FormPage = () => {
         (signal) => itemsApi.createItem(formData, signal),
         signal
       );
-      console.log(data);
       setStep(3);
+      formStore.deleteData();
     } catch (error) {
       const err = handleError(error);
       console.log(err);
     }
-
-    console.log("Форма отправлена:", formData);
   }
 
-  const handleChange = (name: string, value: string, type: IFieldTypes) => {
+  const handleBlur = (name: string, value: string, type: IFieldTypes) => {
     setErrors((prevErrors) => {
       const error = validateField(name, value, type);
       if (!error) {
         const { [name]: _, ...rest } = prevErrors;
         setFormData((prev) => ({ ...prev, [name]: value }));
+        formStore.changeData(name, value);
         return rest;
       }
       return { ...prevErrors, [name]: error };
     });
   };
 
+  const handleChange = (name: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    formStore.changeData(name, value);
+  };
+
   function continueForm() {
-    if (!validateForm()) return;
+    if (!formData || !validateForm()) return;
 
     const selectedCategory = formData["type"];
     if (!selectedCategory || !categoryFields[selectedCategory]) {
@@ -265,22 +281,26 @@ const FormPage = () => {
                       errors={errors}
                       buttonType={fieldButtonTypes.button}
                       handleChange={handleChange}
+                      handleBlur={handleBlur}
                       handleClick={continueForm}
+                      values={formData || {}}
                     />
                   </div>
                 )}
-                {step === 2 && (
+                {step === 2 && formData && (
                   <div className="form-step second-step">
                     <Form
                       fields={categoryFields[formData["type"]]}
                       errors={errors}
                       buttonType={fieldButtonTypes.submit}
                       handleChange={handleChange}
+                      handleBlur={handleBlur}
+                      values={formData || {}}
                     />
                     <Btn
                       startIcon={<ArrowBackIcon />}
                       sx={{ mt: 2 }}
-                      onClick={() => setStep((prev) => prev--)}
+                      onClick={() => setStep((prev) => --prev)}
                     >
                       Назад
                     </Btn>

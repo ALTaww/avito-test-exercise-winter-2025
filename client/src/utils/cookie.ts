@@ -29,9 +29,6 @@ class Cookie {
         updatedCookie += "=" + optionValue;
       }
     }
-    console.log(updatedCookie);
-    console.log(document.cookie);
-    console.log(this.getCookie(name));
 
     document.cookie = updatedCookie;
   }
