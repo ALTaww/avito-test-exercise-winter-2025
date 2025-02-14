@@ -1,8 +1,71 @@
 @import "./variables";
+@import "./mixins";
 
 html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-size: $font-size;
+  min-height: 100vh;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: $text-color;
+  background-color: $background-color;
+  min-height: 100%;
+}
+
+// Чтобы страница растягивалась по высоте окна
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .page {
+    flex: 1 1;
+  }
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.text {
+    color: $text-color;
+  }
+  &.inherit {
+    color: inherit;
+  }
+}
+
+.image-container {
+  img {
+    width: 100%;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+}
+
+@include breakpoints-max(xl) {
+  #root {
+    padding: 1rem;
+  }
 }

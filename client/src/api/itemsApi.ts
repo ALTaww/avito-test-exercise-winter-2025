@@ -8,7 +8,7 @@ import {
 
 class ItemsApi {
   async createItem<T extends keyof ItemTypeMap>(
-    itemData: { type: T } & IItemFromType<T>, // itemData включает type + нужные поля
+    itemData: IItemFromType<T>, // itemData включает type + нужные поля
     signal: AbortSignal
   ): Promise<IItems | IErrorResponse> {
     const { data } = await $host.post("/items", itemData, { signal });
@@ -27,8 +27,8 @@ class ItemsApi {
 
   async updateItem(
     id: number,
-    signal: AbortSignal,
-    itemData: Partial<IItems>
+    itemData: Partial<IItems>,
+    signal: AbortSignal
   ): Promise<IItems | string> {
     const { data } = await $host.put(`/items/${id}`, itemData, { signal });
     return data;
