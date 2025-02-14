@@ -7,7 +7,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.4",
     "@mui/material": "^6.4.4",
-    "@testing-library/jest-dom": "^6.6.3",
+    "@types/react-router-dom": "^5.3.3",
     "axios": "^1.7.9",
     "cra-template-typescript": "1.2.0",
     "mobx": "^6.13.6",
@@ -44,9 +44,19 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^29.5.14",
+    "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "cross-env": "^7.0.3",
     "jest": "^27.5.1"
-  }
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!axios)"
+    ]
+  },
+  "type": "module"
 }

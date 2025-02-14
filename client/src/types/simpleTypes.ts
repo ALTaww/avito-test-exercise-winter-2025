@@ -25,6 +25,7 @@ export const fieldTypes = {
   select: "select",
   number: "number",
   file: "file",
+  password: "password",
 } as const;
 
 export const fieldButtonTypes = {
