@@ -223,10 +223,17 @@ const FormPage = () => {
     const { controller, signal } = createNewAbortController(abortControllerRef);
     abortControllerRef.current = controller;
     try {
-      const data = await fetchWithAbort(
-        (signal) => itemsApi.createItem(formData, signal),
-        signal
-      );
+      if (!formData.id) {
+        await fetchWithAbort(
+          (signal) => itemsApi.createItem(formData, signal),
+          signal
+        );
+      } else {
+        await fetchWithAbort(
+          (signal) => itemsApi.updateItem(formData.id, formData, signal),
+          signal
+        );
+      }
       setStep(3);
       formStore.deleteData();
     } catch (error) {
